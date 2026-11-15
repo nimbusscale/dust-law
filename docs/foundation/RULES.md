@@ -40,7 +40,7 @@ Some tiles carry a hostile marker. These are called **hostile tiles**. A hostile
 
 ## Starting a Game
 
-The host picks the game length when setting up the game. By default the game uses **20 tiles per player** (40 tiles for 2 players, 100 for 5). The host can change this, but not below **13 tiles per player**. This number is the **tile supply**.
+The host picks the game length when setting up the game. By default the game uses **20 tiles per player** (40 tiles for 2 players, 100 for 5). The host can set anywhere from **10 to 40 tiles per player**. The total is the **tile supply**. Each player gets one turn for each tile per player, so the default game is 20 turns each (see *End of the Game*).
 
 When the game starts, it does the following:
 
@@ -82,7 +82,7 @@ If the tile carries a hostile, the hostile joins whatever feature it sits in as 
 
 ### Stuck Hands
 
-If none of the tiles in your hand fit anywhere on the board, the game tells you. Discard one tile of your choice. Everyone sees the tile you discarded. You draw a replacement, if the supply has any left. Your turn ends there. You do not lay a tile or deploy an enforcer this turn.
+If none of the tiles in your hand fit anywhere on the board, the game tells you. Discard one tile of your choice. Everyone sees the tile you discarded. You draw a replacement, if the supply has any left. Your turn ends there. You do not lay a tile or deploy an enforcer this turn. It still counts as one of your turns.
 
 ### 2. Deploy an Enforcer
 
@@ -203,13 +203,17 @@ Bounties only count features that are finished and scored. Unfinished features n
 
 "Score points from" a feature means you received at least 1 point from that feature's own scoring. A garrison's road bonus comes from the garrison, not the road. So it doesn't count as scoring points from the road for Long Haul, Clear the Road, or Full Patrol.
 
+A raider camp cancelled by a garrison is still on the road. So that road still holds a raider camp for Clear the Road.
+
 Features scored on the same turn all count. For example, one tile that finishes your first two outposts meets Frontier.
 
 ---
 
 ## End of the Game
 
-When the tile supply runs out, the current round finishes. The round ends after the last player in turn order has taken their turn. That way everyone gets the same number of turns. Players keep laying tiles from their hands during this last round but draw nothing. Any tiles still in hand at the end go unplayed.
+When the tile supply runs out, play goes on without drawing. Players keep taking turns in order, playing from their hands, until every hand is empty. Then the game ends.
+
+Every turn uses up one tile from your hand. You either lay it or, if your hand is stuck, discard it. While the supply lasts, you draw one back. So every player gets exactly one turn for each tile per player, and all hands run out in the same round. At the default of 20 tiles per player, the game lasts 20 rounds.
 
 ### Final Scoring
 

@@ -49,6 +49,7 @@ The engine is shared code. The server uses it to run the game. The client may us
 
 - **The server is in charge.** Every action is checked by the engine on the server. A modified client can't make an illegal move.
 - **The server generates tiles.** A client never decides what a player draws.
+- **The seed stays on the server.** A client never receives a game's random seed. Anyone with the seed could predict every draw.
 - **Hidden information stays hidden.** Each player receives their own hand and nobody else's. Other players only see how many tiles each player holds. The server must filter state per player before sending it, not rely on the client to hide it.
 - **Everyone sees changes right away.** When any player acts, every player in the game sees the result without refreshing.
 - **Several games at once.** The server can run more than one game at the same time, each fully separate.
@@ -63,7 +64,7 @@ The server and browsers talk over WebSockets, using the **Socket.IO** library.
 
 ## Starting and Joining a Game
 
-- A player creates a game and becomes the host. The host picks the game length (tiles per player, default 20, minimum 13).
+- A player creates a game and becomes the host. The host picks the game length (tiles per player, default 20, from 10 to 40).
 - The host shares a way for others to join, such as a link or a short code.
 - How players are identified is still to be decided (see *Open Questions*).
 - A game holds at most 5 players. Once 5 have joined, nobody else can join, even before the game starts.
@@ -101,7 +102,7 @@ Engine tests (Vitest) must cover at least:
 - **Control and scoring.** Split ties, hostiles as a neutral side, hostiles winning outright, and outpost scoring with bastion neighbors.
 - **Garrisons.** Leaving a garrison whoever won, the road bonus including same-turn roads, and cancelling a hostile.
 - **Bounties.** Each bounty's condition, and splitting a bounty met by two players on the same turn.
-- **Stuck hands and the end of the game.** Discarding when stuck, finishing the last round, and wasteland scoring.
+- **Stuck hands and the end of the game.** Discarding when stuck, playing out hands after the supply runs out, every player getting the same number of turns, and wasteland scoring.
 - **Tile generation.** The tests listed in `TILES.md`.
 - **A full game.** A fixed seed and a fixed set of moves play to the end with no illegal states and correct final scores.
 

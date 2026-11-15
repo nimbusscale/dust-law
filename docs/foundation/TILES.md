@@ -6,9 +6,9 @@ This document describes what a tile is and how the game creates one each time a 
 
 There is no fixed deck. Each draw works like this:
 
-1. Pick a **shape** from the shape catalog at random, using each shape's weight.
-2. Maybe add a **hostile** to one of the tile's features.
-3. Check that the tile **fits** somewhere on the board right now. If it doesn't, throw it away and start over.
+1. Find every **shape** in the catalog that **fits** somewhere on the board right now.
+2. Pick one of those shapes at random, using each shape's weight.
+3. Maybe add a **hostile** to one of the tile's features.
 
 A shape is a complete tile layout: what's on each edge and how things connect inside the tile. The catalog below is the full list of shapes. Every tile in the game is one of these shapes, in one of four rotations, with or without a hostile.
 
@@ -134,22 +134,21 @@ The catalog must always follow these rules. They are what make generation safe.
 
 When a player draws, the game does this:
 
-1. **Pick a shape** at random, using the weights.
-2. **Roll for a hostile.** Each tile has a **15%** chance of a hostile.
+1. **Find the shapes that fit.** A shape fits if there is at least one empty space next to the board, and at least one rotation, where the placement is legal under `RULES.md`. That includes the edge-matching table above and the rule that outposts can't touch each other.
+2. **Pick a shape** at random from the ones that fit, using their weights. Shapes that don't fit right now have no chance of being picked.
+3. **Roll for a hostile.** Every tile has a **15%** chance of a hostile.
    - If it gets one, pick a hostile type at random from the types the shape can hold. A gang stronghold needs a bastion segment, a raider camp needs a road segment, and a mutant warren needs a wasteland region. Each allowed type is equally likely.
    - Then pick one segment of that kind at random.
    - The outpost has nowhere to put a hostile, so it never gets one.
-3. **Check the fit.** The tile fits if there is at least one empty space next to the board, and at least one rotation, where the placement is legal under `RULES.md`. That includes the edge-matching table above and the rule that outposts can't touch each other.
-4. **If it fits,** the player gets it, in the reference orientation. The player picks the rotation when they play it.
-5. **If it doesn't fit,** throw it away and go back to step 1. A tile that's thrown away here doesn't count against the tile supply.
+4. **Hand it over.** The player gets the tile in the reference orientation. The player picks the rotation when they play it.
 
-After **50** tries in a row with no fit, stop rolling at random. Instead, pick at random among only the shapes that fit, using their weights. This keeps a draw from looping forever on an awkward board.
+A hostile never changes whether a tile fits, so the fit check only looks at shapes.
 
 ### Why a tile always fits
 
 There is always some empty space with only one neighbor. For example, the space directly above the topmost tile on the board. Nothing is above it, so its east and west neighbors are empty too. That space only needs a tile with one matching edge.
 
-The edge it needs to match is a bastion, road, wasteland, or outpost edge. Catalog rule 1 guarantees a shape with a bastion, road, or wasteland edge. A wasteland edge also matches an outpost. So some shape always fits, and the fallback in step 5 always finds one.
+The edge it needs to match is a bastion, road, wasteland, or outpost edge. Catalog rule 1 guarantees a shape with a bastion, road, or wasteland edge. A wasteland edge also matches an outpost. So some shape always fits, and the list of shapes in step 1 is never empty.
 
 ### The start tile
 
@@ -157,15 +156,15 @@ The start tile is the `open` shape with no hostile. The game places it at the ce
 
 ## Randomness and Replays
 
-All randomness comes from the game's single seeded random number generator. That covers shapes, hostiles, and the fallback pick.
+All randomness comes from the game's single seeded random number generator. That covers shapes and hostiles.
 
 A draw also depends on the board, because of the fit check. So the same seed gives the same tiles only if players make the same moves. A replay needs the seed plus every move in order.
 
-In a networked game, the server runs the generator. A player's own browser never decides what they draw.
+In a networked game, the server runs the generator. A player's own browser never decides what they draw, and never receives the seed.
 
 ## Tuning
 
-The weights, the 15% hostile chance, and the 50-try limit are starting values. They are expected to change after playtesting. Keep them in data or config, not hardcoded, so they can be changed without touching game logic.
+The weights and the 15% hostile chance are starting values. They are expected to change after playtesting. Keep them in data or config, not hardcoded, so they can be changed without touching game logic.
 
 The catalog itself should live in a data file that the engine loads. This document is the source for that file. When the two disagree, update one to match the other.
 
@@ -176,6 +175,6 @@ The generator needs tests that cover at least:
 - **Catalog checks.** Every shape follows the four catalog rules. Every shape's weight is positive, and the weights add up to 100.
 - **Rotation.** Rotating a shape four times gets back the original. Edges, segments, regions, and hostiles all move together.
 - **Every draw fits.** On a range of boards, every generated tile has at least one legal placement.
-- **The fallback works.** On a board built so that random picks keep failing, a draw still returns a tile that fits.
+- **Only fitting shapes are picked.** On a board built so that only a few shapes fit, every draw is one of those shapes.
 - **Weights hold.** On an open board where everything fits, a large number of draws comes out close to the weights.
 - **Determinism.** The same seed and the same moves give the same tiles.
