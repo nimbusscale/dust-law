@@ -40,7 +40,7 @@ Some tiles carry a hostile marker. These are called **hostile tiles**. A hostile
 
 ## Starting a Game
 
-The host picks the game length when setting up the game. By default the game uses **20 tiles per player** (40 tiles for 2 players, 100 for 5). The host can change this. This number is the **tile supply**.
+The host picks the game length when setting up the game. By default the game uses **20 tiles per player** (40 tiles for 2 players, 100 for 5). The host can change this, but not below **13 tiles per player**. This number is the **tile supply**.
 
 When the game starts, it does the following:
 
@@ -66,8 +66,8 @@ Your turn has five steps. You do the first two. The game does the rest.
 
 1. **Lay a tile** from your hand.
 2. **Deploy an enforcer** on that tile, if you want to.
-3. **Scoring.** The game scores every feature your tile finished.
-4. **Bounties.** The game checks whether anyone has met a bounty.
+3. **Scoring.** Players choose any new garrisons. Then the game scores every feature your tile finished.
+4. **Bounties.** Once all scoring is done, the game checks whether anyone has met a bounty.
 5. **Draw.** The game deals you one tile to bring your hand back to three, if the supply has any left.
 
 ### 1. Lay a Tile
@@ -98,11 +98,16 @@ More than one enforcer can end up on the same feature. That happens when separat
 
 ### 3. Scoring
 
-The game checks every bastion, road, and outpost that your tile touches. It scores each one that is now finished. If a single tile finishes several features, score them all.
+The game scores every bastion, road, and outpost your tile finished. One tile can finish several features, and they are all scored. This includes an outpost your tile only touches at a corner, since that tile can be the last of the outpost's eight neighbors.
+
+Scoring happens in this order:
+
+1. **Garrisons.** If your tile finished a bastion, each player with a judge in it decides whether to leave a garrison (see *Garrisons*).
+2. **Score.** The game scores every feature your tile finished. Garrisons count, including any just left in the first step.
 
 **When features are finished:**
 
-- A **bastion** is finished when its walls are closed all the way around, with no open edge left.
+- A **bastion** is finished when its walls are closed. A bastion's wall is the line between the bastion and the land around it. Gates don't break the wall. The bastion is finished when you can follow each of its walls all the way around, back to where you started. A tile that's all bastion has no wall on it. Each of its sides must touch another bastion tile, and its wall runs along those tiles.
 - A **road** is finished when both of its ends stop. A road stops at a crossroads, at a bastion, at an outpost, or by looping back into itself.
 - An **outpost** is finished when all eight spaces around it hold tiles.
 
@@ -118,7 +123,7 @@ Count tiles, not pieces. If one tile holds two separate bits of the same bastion
 
 An outpost pays for being remote. Any neighbor with even a sliver of bastion on it is worth nothing. An outpost with no bastions around it scores 9. One with three bastion tiles around it scores 6.
 
-Work out who controls the feature (see *Control and Ties*) and award the points. Then every enforcer on that feature goes back to its owner's supply, except for a judge who stays as a garrison (see *Garrisons*).
+Work out who controls the feature (see *Control and Ties*) and award the points. Then every enforcer on that feature goes back to its owner's supply, except a judge left as a garrison (see *Garrisons*).
 
 You can deploy an enforcer, finish its feature, score it, and get the enforcer back, all in the same turn.
 
@@ -126,7 +131,7 @@ Wastelands are never scored during play. Rangers stay on the board until the end
 
 ### 4. Bounties
 
-If any player now meets the condition on a bounty that hasn't been claimed, they claim it and score its points. A claimed bounty is out of play. If two or more players meet the same bounty on the same turn, they split its points, rounded down.
+If any player now meets the condition on a bounty that hasn't been claimed, they claim it and score its points. The game checks every player, not just the one whose turn it is. All Hands is the one exception: it is only checked for the player whose turn it is. A claimed bounty is out of play. If two or more players meet the same bounty on the same turn, they split its points, rounded down.
 
 ### 5. Draw
 
@@ -155,20 +160,25 @@ The same rule applies to raider camps on roads, to mutant warrens in wastelands,
 
 ## Garrisons
 
-When a bastion is finished, each player with a judge in it may leave **one** of their judges behind as a garrison. This is true whoever won the bastion, even if the hostiles took it and nobody scored. The game asks each of those players in turn order, starting with the player whose turn it is. All other judges in the bastion go home as normal.
+When a bastion is finished, and before it is scored, each player with a judge in it may leave **one** of their judges behind as a garrison. This is true whoever wins the bastion, even if the hostiles take it and nobody scores. The game asks each of those players in turn order, starting with the player whose turn it is. All other judges in the bastion go home once the bastion is scored.
 
-A garrisoned judge never comes back. It stays out of your supply for the rest of the game. In return, it does two things.
+A garrison is still a judge, and still one of your enforcers on the board. It counts as a judge when its own bastion is scored.
+
+A garrisoned judge never comes back. It stays on the board, out of your supply, for the rest of the game. In return, it does two things.
 
 **Road bonus.** Each time a **road that ends at the garrisoned bastion** is finished, the garrison's owner scores **2 bonus points**. This is on top of whatever the road itself scores.
 
 - The bonus pays no matter who wins the road. It pays even if raiders take the road or nobody has a rider on it.
-- It also pays for a road finished by the same tile that finished the bastion. Choose your garrison first, then collect the bonus.
+- It also pays for a road finished by the same tile that finished the bastion, because garrisons are chosen before anything is scored.
+- A road that leaves the bastion and loops back to it is still one road. When it is finished, it pays the bonus once, not twice.
+- Each garrison pays its own owner. If two players each left a garrison in the bastion, each of them gets 2 points.
 
 **Keeping the peace.** A garrison cancels **one hostile** when the game works out control of a road that ends at the bastion, or of a wasteland that borders it.
 
 - It only works if the garrison's owner has at least one enforcer on that road or in that wasteland.
 - The cancelled hostile is gone for everyone in that count, not just for you.
-- Each garrison cancels one hostile per feature. A road running between two garrisoned bastions could have two hostiles cancelled.
+- It also works on a road finished by the same tile that finished the bastion, because garrisons are chosen before anything is scored.
+- Each garrison cancels one hostile per feature. This counts garrisons, not road ends. A road running between two garrisoned bastions can have two hostiles cancelled. So can a road that ends at one bastion holding two garrisons. A road that loops back to a bastion holding one garrison has only one cancelled.
 
 For example, a road ends at your garrisoned bastion. It holds your rider and one raider camp. Normally you would tie with the raiders and score half. With your garrison, the raider camp is cancelled and you score the full amount.
 
@@ -184,12 +194,16 @@ The game picks three of these bounties at random at the start. The rest are not 
 | **Long Haul** | Score points from a road of 6 or more tiles. | 5 |
 | **Clean Sweep** | Score points from a bastion that holds a gang stronghold. | 5 |
 | **Clear the Road** | Score points from a road that holds a raider camp. | 4 |
-| **Frontier** | Score points from your second outpost. | 5 |
+| **Frontier** | Over the game, score points from two outposts. | 5 |
 | **Full Patrol** | Over the game, score points from at least one bastion, one road, and one outpost. | 6 |
 | **Lockdown** | Have two garrisons on the board at the same time. | 5 |
-| **All Hands** | End your turn with all 7 of your enforcers on the board. | 4 |
+| **All Hands** | When your own turn's scoring is done, have all 7 of your enforcers on the board. Garrisons count. | 4 |
 
-"Score points from" means you received at least 1 point when that feature was scored.
+Bounties only count features that are finished and scored. Unfinished features never count.
+
+"Score points from" a feature means you received at least 1 point from that feature's own scoring. A garrison's road bonus comes from the garrison, not the road. So it doesn't count as scoring points from the road for Long Haul, Clear the Road, or Full Patrol.
+
+Features scored on the same turn all count. For example, one tile that finishes your first two outposts meets Frontier.
 
 ---
 
@@ -208,7 +222,7 @@ Then the game scores each wasteland that holds at least one ranger:
 - Work out control as usual. Mutant warrens count as hostiles.
 - One bastion can count for several wastelands.
 
-The game shows each player's points by category. The player with the most points wins. If players are tied, they share the win.
+The game shows each player's points in six categories: bastions, roads, outposts, garrison bonuses, bounties, and wastelands. The player with the most points wins. If players are tied, they share the win.
 
 ---
 
