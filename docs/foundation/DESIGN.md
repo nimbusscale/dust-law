@@ -96,7 +96,7 @@ The server and browsers talk over WebSockets, using the **Socket.IO** library.
 
 Engine tests (Vitest) must cover at least:
 
-- **Placement.** Edge matching, including outpost edges and the rule that outposts can't touch. Rejection of illegal placements.
+- **Placement.** Edge matching, including outpost edges and the rule that an outpost can't be in any of the eight spaces around another outpost, corners included. Rejection of illegal placements.
 - **Features.** Joining features across tiles. Finishing bastions, roads, and outposts, including roads that end at outposts, gates, and junctions.
 - **Enforcers.** The rule against deploying onto a feature that already has an enforcer, checked across the whole joined feature. Hostiles not blocking deployment.
 - **Control and scoring.** Split ties, hostiles as a neutral side, hostiles winning outright, and outpost scoring with bastion neighbors.

@@ -76,7 +76,7 @@ Choose any tile from your hand. Rotate it to any of the four directions and plac
 
 - It must sit edge to edge with at least one tile already on the board. Touching only at a corner does not count.
 - Every edge it shares with a neighbor must match that neighbor: bastion against bastion, road against road, wasteland against wasteland.
-- An outpost is the exception. Its edges accept a road or wasteland, but never a bastion and never another outpost. Two outposts can't sit side by side. A bastion can sit on a tile next to an outpost, but there must be wasteland or road between them on that tile.
+- An outpost is the exception. Its edges accept a road or wasteland, but never a bastion and never another outpost. An outpost can't be in any of the eight spaces around another outpost, including the four corner spaces. A bastion can sit on a tile next to an outpost, but there must be wasteland or road between them on that tile.
 
 If the tile carries a hostile, the hostile joins whatever feature it sits in as soon as the tile is laid.
 
@@ -121,6 +121,8 @@ Scoring happens in this order:
 
 Count tiles, not pieces. If one tile holds two separate bits of the same bastion, it counts once.
 
+An outpost that a road ends at is not part of the road. Its tile doesn't count toward the road's points or length.
+
 An outpost pays for being remote. Any neighbor with even a sliver of bastion on it is worth nothing. An outpost with no bastions around it scores 9. One with three bastion tiles around it scores 6.
 
 Work out who controls the feature (see *Control and Ties*) and award the points. Then every enforcer on that feature goes back to its owner's supply, except a judge left as a garrison (see *Garrisons*).
@@ -141,7 +143,7 @@ The game deals you one tile, so you hold three again. If the supply is empty, no
 
 ## Control and Ties
 
-When a feature is scored, count the enforcers on it for each player. Each hostile on it counts as one enforcer for a neutral side, the **hostiles**. All the hostiles on a feature count together, so a bastion with two gang strongholds gives the hostiles two.
+When a feature is scored, count the enforcers on it for each player. Only players with at least one enforcer on the feature take part in its scoring. So a feature with no enforcers on it scores nothing. Each hostile on it counts as one enforcer for a neutral side, the **hostiles**. All the hostiles on a feature count together, so a bastion with two gang strongholds gives the hostiles two.
 
 - The side with the most enforcers takes the points.
 - If sides are tied for most, they split the points evenly, rounded down. Any share that goes to the hostiles is lost.
@@ -160,7 +162,7 @@ The same rule applies to raider camps on roads, to mutant warrens in wastelands,
 
 ## Garrisons
 
-When a bastion is finished, and before it is scored, each player with a judge in it may leave **one** of their judges behind as a garrison. This is true whoever wins the bastion, even if the hostiles take it and nobody scores. The game asks each of those players in turn order, starting with the player whose turn it is. All other judges in the bastion go home once the bastion is scored.
+When a bastion is finished, and before it is scored, each player with a judge in it may leave **one** of their judges behind as a garrison. This is true whoever wins the bastion, even if the hostiles take it and nobody scores. The game asks each of those players in turn order, starting with the player whose turn it is. If one tile finished several bastions, each player decides on every bastion they have a judge in, then the game moves to the next player. Everyone sees each choice as it is made. All other judges in the bastion go home once the bastion is scored.
 
 A garrison is still a judge, and still one of your enforcers on the board. It counts as a judge when its own bastion is scored.
 
