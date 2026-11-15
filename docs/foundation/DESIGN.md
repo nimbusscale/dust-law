@@ -24,7 +24,7 @@ The game is a scenario for practicing issue-driven development with coding agent
 - No computer opponents.
 - No matchmaking. Players join a game they've been invited to.
 - No art assets or animation beyond tiles drawn in code.
-- No mobile app. A desktop browser is the target.
+- No mobile app. A desktop browser is the target. Phone browsers aren't blocked, but the game isn't designed or tested for them.
 
 ## Tech Stack
 
@@ -63,9 +63,12 @@ The server and browsers talk over WebSockets, using the **Socket.IO** library.
 
 ## Starting and Joining a Game
 
-- A player creates a game and becomes the host. The host picks the game length (tiles per player, default 20).
+- A player creates a game and becomes the host. The host picks the game length (tiles per player, default 20, minimum 13).
 - The host shares a way for others to join, such as a link or a short code.
 - How players are identified is still to be decided (see *Open Questions*).
+- A game holds at most 5 players. Once 5 have joined, nobody else can join, even before the game starts.
+- Nobody can join a game that has already started.
+- A player who can't join is told why, such as "This game is full" or "This game has already started."
 - The host starts the game once 2 to 5 players have joined.
 
 ## Determinism
@@ -79,14 +82,14 @@ The server and browsers talk over WebSockets, using the **Socket.IO** library.
 
 - A board you can pan and zoom, with the start tile in the center.
 - Your hand of three tiles, visible only to you. You can choose a tile and rotate it.
-- When you pick a tile, the board shows where it fits. Illegal spots can't be chosen.
+- When you pick a tile, the board shows where it fits in its current rotation. The highlights change as you rotate it. Illegal spots can't be chosen.
 - After placing a tile, you can place an enforcer on a legal feature of that tile, or skip.
 - A garrison prompt when a bastion you have a judge in is finished.
 - A clear message when your hand is stuck, letting you choose a tile to discard.
 - A score panel showing every player's score, enforcers left, and tiles in hand, plus whose turn it is.
 - The three bounties in play, and who has claimed them.
 - Clear feedback when a feature is finished and scored, including garrison bonuses and bounties.
-- An end screen with each player's points by category and the winner, including shared wins.
+- An end screen with each player's points in each category and the winner, including shared wins. The categories are bastions, roads, outposts, garrison bonuses, bounties, and wastelands.
 
 ## Testing
 

@@ -34,6 +34,8 @@ Two tiles side by side must have matching edges where they touch:
 
 When a road edge touches an outpost, that road ends at the outpost. When a wasteland edge touches an outpost, the wasteland stops there.
 
+`RULES.md` says a bastion is finished when all of its walls close. In terms of edges, a bastion is finished when no bastion edge on any of its tiles faces an empty space. A bastion edge can only touch another bastion edge, so any tile laid against one joins that bastion.
+
 ### Features inside a tile
 
 A tile lists the separate pieces of each feature it contains. A piece is called a **segment**.
