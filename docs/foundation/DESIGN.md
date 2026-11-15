@@ -81,7 +81,7 @@ The server and browsers talk over WebSockets, using the **Socket.IO** library.
 
 ## UI Requirements
 
-- A board you can pan and zoom, with the start tile in the center.
+- A board you can pan and zoom, starting centered on the start tile. The board has no fixed size and grows in every direction.
 - Your hand of three tiles, visible only to you. You can choose a tile and rotate it.
 - When you pick a tile, the board shows where it fits in its current rotation. The highlights change as you rotate it. Illegal spots can't be chosen.
 - After placing a tile, you can place an enforcer on a legal feature of that tile, or skip.

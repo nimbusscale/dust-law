@@ -152,7 +152,7 @@ The edge it needs to match is a bastion, road, wasteland, or outpost edge. Catal
 
 ### The start tile
 
-The start tile is the `open` shape with no hostile. The game places it at the center of the board before anyone draws. It does not come out of the tile supply and does not use the generator.
+The start tile is the `open` shape with no hostile. The game places it on the board before anyone draws. The board has no edge or fixed size, which the argument in *Why a tile always fits* relies on. It does not come out of the tile supply and does not use the generator.
 
 ## Randomness and Replays
 
