@@ -168,7 +168,7 @@ A garrison is still a judge, and still one of your enforcers on the board. It co
 
 A garrisoned judge never comes back. It stays on the board, out of your supply, for the rest of the game. In return, it does two things.
 
-**Road bonus.** Each time a **road that ends at the garrisoned bastion** is finished, the garrison's owner scores **2 bonus points**. This is on top of whatever the road itself scores.
+**Road bonus.** Each time a **road that ends at the garrisoned bastion** is finished, the garrison's owner scores **2 bonus points**. This is on top of whatever the road itself scores. A garrison only pays for roads finished after it was left. Roads that were already finished when the garrison was left never pay it.
 
 - The bonus pays no matter who wins the road. It pays even if raiders take the road or nobody has a rider on it.
 - It also pays for a road finished by the same tile that finished the bastion, because garrisons are chosen before anything is scored.
@@ -192,14 +192,16 @@ The game picks three of these bounties at random at the start. The rest are not 
 
 | Bounty | Condition | Points |
 |---|---|---|
-| **Big Walls** | Score points from a bastion of 6 or more tiles. | 6 |
-| **Long Haul** | Score points from a road of 6 or more tiles. | 5 |
-| **Clean Sweep** | Score points from a bastion that holds a gang stronghold. | 5 |
-| **Clear the Road** | Score points from a road that holds a raider camp. | 4 |
-| **Frontier** | Over the game, score points from two outposts. | 5 |
-| **Full Patrol** | Over the game, score points from at least one bastion, one road, and one outpost. | 6 |
-| **Lockdown** | Have two garrisons on the board at the same time. | 5 |
-| **All Hands** | When your own turn's scoring is done, have all 7 of your enforcers on the board. Garrisons count. | 4 |
+| **Big Walls** | You score points from a bastion of 6 or more tiles. | 6 |
+| **Long Haul** | You score points from a road of 6 or more tiles. | 5 |
+| **Clean Sweep** | You score points from a bastion that holds a gang stronghold. | 5 |
+| **Clear the Road** | You score points from a road that holds a raider camp. | 4 |
+| **Frontier** | Over the game, you score points from two outposts. | 5 |
+| **Full Patrol** | Over the game, you score points from at least one bastion, one road, and one outpost. | 6 |
+| **Lockdown** | You have two garrisons of your own on the board. | 5 |
+| **All Hands** | When your own turn's scoring is done, all 7 of your enforcers are on the board. Your garrisons count. | 4 |
+
+Every bounty counts only one player's own results. Two players can't pool what they've each done to meet a bounty together. For example, if you score one outpost and a rival scores another, neither of you has met Frontier.
 
 Bounties only count features that are finished and scored. Unfinished features never count.
 
