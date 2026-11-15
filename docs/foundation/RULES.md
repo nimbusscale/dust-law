@@ -44,7 +44,7 @@ The host picks the game length when setting up the game. By default the game use
 
 When the game starts, it does the following:
 
-1. Puts the start tile in the center of the board. The start tile is always a plain wasteland tile. It is extra and does not count against the tile supply.
+1. Puts the start tile on the board. The board has no edge or fixed size. It grows in every direction as tiles are laid. The start tile is always a plain wasteland tile. It is extra and does not count against the tile supply.
 2. Gives each player 7 enforcers and a score of 0.
 3. Picks **3 bounties** at random and shows them to everyone.
 4. Deals each player **3 tiles** from the tile supply as their starting hand. Only you can see your hand. Other players can see how many tiles you hold, but not what they are.
@@ -76,7 +76,7 @@ Choose any tile from your hand. Rotate it to any of the four directions and plac
 
 - It must sit edge to edge with at least one tile already on the board. Touching only at a corner does not count.
 - Every edge it shares with a neighbor must match that neighbor: bastion against bastion, road against road, wasteland against wasteland.
-- An outpost is the exception. Its edges accept a road or wasteland, but never a bastion and never another outpost. An outpost can't be in any of the eight spaces around another outpost, including the four corner spaces. A bastion can sit on a tile next to an outpost, but there must be wasteland or road between them on that tile.
+- An outpost is the exception. Its edges accept a road or wasteland, but never a bastion and never another outpost. An outpost can't be in any of the eight spaces around another outpost, including the four corner spaces. A tile that shares an edge with an outpost can still hold bastion, but edge matching means there is always wasteland or road between that bastion and the outpost. A tile diagonal to an outpost has no such limit. Its bastion can reach right up to the outpost's corner.
 
 If the tile carries a hostile, the hostile joins whatever feature it sits in as soon as the tile is laid.
 
