@@ -134,7 +134,7 @@ The catalog must always follow these rules. They are what make generation safe.
 
 When a player draws, the game does this:
 
-1. **Find the shapes that fit.** A shape fits if there is at least one empty space next to the board, and at least one rotation, where the placement is legal under `RULES.md`. That includes the edge-matching table above and the rule that outposts can't touch each other.
+1. **Find the shapes that fit.** A shape fits if there is at least one empty space next to the board, and at least one rotation, where the placement is legal under `RULES.md`. That includes the edge-matching table above and the rule that an outpost can't be in any of the eight spaces around another outpost.
 2. **Pick a shape** at random from the ones that fit, using their weights. Shapes that don't fit right now have no chance of being picked.
 3. **Roll for a hostile.** Every tile has a **15%** chance of a hostile.
    - If it gets one, pick a hostile type at random from the types the shape can hold. A gang stronghold needs a bastion segment, a raider camp needs a road segment, and a mutant warren needs a wasteland region. Each allowed type is equally likely.
