@@ -15,6 +15,7 @@ the code are comments there instead.
   the edge and the second names the half.
 - **Client.** The part of the code that runs in each player's browser. It shows the game and sends
   the player's actions.
+- **Link code.** The random code in a player link that says which game and player it opens.
 - **Engine.** The part of the code that holds the game rules and the game state.
 - **Player view.** The copy of a game's state that the server sends to one player.
 - **Random number generator.** The seeded source of random numbers for one game.
@@ -54,6 +55,12 @@ plain WebSockets would mean writing both ourselves.
 by replaying the log through the engine.
 
 *Why:* it makes any game easy to reproduce, test and debug. Saving a game only needs that list.
+
+**AD-10.** The code is one npm workspace with three packages: engine, server and client.
+
+*Why:* the server and the client both import the engine (TD-9).
+
+**AD-11.** Games live only in the server's memory.
 
 ## T-SEC-3. Code standards
 
@@ -135,6 +142,16 @@ generator.
 **TR-12.** The server shall put in each player view only the hand contents that FR-95 lets that
 player see.
 
+**TR-13.** The server shall give each player link a random link code long enough that no one can
+open a player's game by guessing or changing a link.
+
+**TR-14.** The server shall apply an action only for the player whose player link opened the
+connection it came on.
+
+**TD-11.** The game lifetime is a server setting, 24 hours by default. It meets FR-116.
+
+*Why:* it can then be changed after playtesting without a code change.
+
 **TD-7.** Each game is its own Socket.IO room. It meets FR-2.
 
 *Why:* a room sends each update only to the players in that game, which keeps games separate.
@@ -144,8 +161,11 @@ game. It meets FR-4.
 
 ## T-SEC-7. Client
 
-**TD-9.** The client holds no rules logic except what it needs to show a player their options,
-such as where a tile fits. The server's check under TR-9 always has the final say. It meets FR-97
-and FR-99.
+**TD-9.** The client imports the engine and uses it to highlight where a tile fits and to offer
+only legal choices, with no rules logic of its own. The server's check under TR-9 always has the
+final say. It meets FR-97 and FR-99.
 
-**TD-10.** Tiles are drawn in code, with no image files. It meets FR-92.
+**TR-15.** When the server rejects an action, the client shall tell the player the move wasn't
+legal and return them to that choice.
+
+**TD-10.** Tiles are drawn as SVG in code, with no image files. It meets FR-92.

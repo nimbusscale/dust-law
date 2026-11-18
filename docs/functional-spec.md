@@ -17,6 +17,7 @@ The functional spec: what the app should do, in the user's terms. Requirements a
 - **Control.** Which side takes a feature's points when it's scored (F-SEC-10).
 - **Current player.** The player whose turn it is.
 - **Deploy.** To put an enforcer from an enforcer supply on a segment of a tile.
+- **Display name.** The name a player is shown by in a game.
 - **Draw.** The app creating a new tile and adding it to a player's hand.
 - **Edge.** One of a tile's four sides: north, east, south or west.
 - **Edge type.** What an edge shows: bastion, road, wasteland or outpost.
@@ -32,6 +33,7 @@ The functional spec: what the app should do, in the user's terms. Requirements a
 - **Finished.** Said of a bastion, road or outpost that meets its condition in F-SEC-9.
 - **Fit.** A tile fits an empty space when, in at least one rotation, the rules in F-SEC-6 let it
   be laid there.
+- **Game lifetime.** How long the app keeps a game after the host starts it.
 - **Game.** One play of Dust Law, from its creation to its end, with its own players, board and
   points totals.
 - **Garrison.** A judge that its owner left behind in a finished bastion (F-SEC-11).
@@ -40,17 +42,18 @@ The functional spec: what the app should do, in the user's terms. Requirements a
 - **Garrisoned bastion.** A bastion with at least one garrison in it.
 - **Gate.** A point inside a tile where a road segment ends at a bastion segment.
 - **Hand.** The tiles a player holds, ready to lay.
-- **Host.** The player who created a game.
+- **Host.** The person who sets up a game.
 - **Hostile.** A neutral marker on a tile: a gang stronghold in a bastion, a raider camp on a road,
   or a mutant warren in a wasteland.
 - **Hostile chance.** The chance that a drawn tile carries a hostile.
 - **Hostile side.** The neutral side made up of the hostiles on a feature when its control is
   worked out.
-- **Invite.** What the host shares so that others can join the host's game.
 - **Junction.** A point inside a tile where three or four road segments end.
 - **Lay.** To place a tile on the board.
 - **Outpost.** A lone station that fills its whole tile.
 - **Player.** A person taking part in a game.
+- **Player color.** The color that marks a player's name and pieces in a game.
+- **Player link.** The web link that opens a game as one of its players.
 - **Points total.** A player's total points in a game.
 - **Reference orientation.** The way round a shape is written in the shape catalog, with north at
   the top.
@@ -86,36 +89,52 @@ computer opponents.
 
 **FR-3.** The app shall be built and tested for desktop web browsers only, with no mobile app.
 
-*Accepted gap:* phone browsers aren't blocked, but the game isn't designed or tested for them. The
-game only has to work well enough for a small group to play and test it.
+*Accepted gap:* phone browsers aren't blocked, but the game isn't designed or tested for them. It only
+has to work for the small group that plays and tests it.
 
 **FR-4.** When any player acts, the app shall show the result to every player in that game without
 them reloading the page.
 
-## F-SEC-3. Creating and joining a game
+**FR-114.** The app shall carry only game actions between players, with no chat or other messages.
+Players share links and talk outside the app.
 
-**FR-5.** When a player creates a game, the app shall make that player the game's host.
+## F-SEC-3. Setting up a game
 
-**FR-6.** When a player creates a game, the app shall give the host an invite they can share with
-others.
+**FR-5.** When a person creates a game, the app shall make them its host.
 
-**FR-7.** The app shall let a person join a game only through that game's invite, with no
-matchmaking.
+**FR-104.** While a game hasn't started, the app shall let its host add players to it, giving each
+one a display name and a player color.
 
-**FR-8.** The app shall let a person join a game only while it has fewer than 5 players.
+**FR-105.** The app shall let the host add a player only while the game has fewer than 5 players.
 
-**FR-9.** The app shall let a person join a game only before the game starts.
+**FR-106.** The app shall accept a display name only if no other player in the same game has it.
 
-**FR-10.** When the app refuses someone who tries to join a game, the app shall tell them why, such
-as "This game is full" or "This game has already started."
+**FR-107.** The app shall let the host pick each player color from a fixed set with enough colors
+for 5 players, and give each color to at most one player in a game.
 
-**FR-11.** While a game hasn't started, the app shall let its host set the tiles per player to any
-whole number from 10 to 40.
+**FR-11.** The app shall let the host set the tiles per player to any whole number from 10 to 40.
 
 **FR-12.** While the host hasn't set the tiles per player, the app shall use 20.
 
+**FR-108.** The app shall let the host change a game's players and tiles per player only before the
+game starts.
+
 **FR-13.** While a game has from 2 to 5 players and hasn't started, the app shall let only its host
 start it.
+
+**FR-109.** When the host starts a game, the app shall show the host every player's player link,
+only that once.
+
+**FR-110.** The app shall give the host no controls over a game once it has started.
+
+**FR-111.** The app shall let a person play in a game only through a player link, with no
+matchmaking.
+
+**FR-112.** When someone opens a player link, the app shall show them the game as that link's
+player.
+
+**FR-113.** When someone opens a player link that is already open somewhere else, the app shall
+move the game to the newest place and tell the older one "This game was opened somewhere else."
 
 ## F-SEC-4. Starting a game
 
@@ -184,7 +203,7 @@ shall give the tile a hostile with a chance equal to the hostile chance.
 equal chance, from the kinds that the shape has a segment for.
 
 **FR-36.** When a drawn tile gets a hostile, the app shall put it in one segment of the matching
-kind, picked at random.
+kind, picked at random with equal chance.
 
 **FR-37.** When the app draws a tile, the app shall add it to the player's hand in its reference
 orientation.
@@ -251,6 +270,16 @@ enforcer deployed.
 
 **FR-51.** While any player holds a tile, when a turn ends, the app shall start the turn of the next
 player in turn order.
+
+**FR-115.** While the app is waiting for a player's choice, the app shall keep waiting with no time
+limit, whether or not that player has the game open.
+
+**FR-120.** The app shall give players no way to undo a lay, a deploy or a garrison choice.
+
+**FR-121.** The app shall end each turn on its own once the turn's last choice is made, with no
+confirm or end-turn step.
+
+*Why:* games should play fast, with nobody waiting on a player who hasn't pressed a button.
 
 ## F-SEC-8. Deploying enforcers
 
@@ -460,3 +489,16 @@ show every player what was scored and the points each player got.
 **FR-103.** When the game ends, the app shall show every player an end screen with the winners and
 each player's points in each of these categories: bastions, roads, outposts, garrison bonuses,
 bounties and wastelands.
+
+**FR-118.** While a game has ended and the app still holds it, the app shall show its end screen to
+anyone who opens one of its player links.
+
+**FR-119.** The app shall show the final board on the end screen.
+
+## F-SEC-15. Game lifetime
+
+**FR-116.** When a game's lifetime has passed since the host started it, the app shall remove the
+game, whether or not it has ended, without telling anyone.
+
+**FR-117.** When someone opens a player link for a game the app doesn't hold, the app shall tell
+them the game timed out and has been removed.

@@ -9,8 +9,8 @@ the server and client use it (AD-6, AD-7, TR-1). Each phase builds only on the p
 
 ## Phase 1. Project setup
 
-Set up one TypeScript project in strict mode (AD-1) with three parts: engine, server and client
-(AD-6). Add Vitest (AD-4), Vite for the client (AD-3), React (AD-2) and Node for the server (AD-5).
+Set up one npm workspace with three packages, engine, server and client (AD-6, AD-10), all in
+TypeScript strict mode (AD-1). Add Vitest (AD-4), Vite for the client (AD-3), React (AD-2) and Node for the server (AD-5).
 Add a lint rule that stops the engine from importing network code, DOM types or React (AD-7).
 
 Done when `tsc` passes, an empty Vitest test passes in each part, and the client and server both
@@ -151,28 +151,38 @@ Done when these tests pass and the engine has a test for every rule it carries o
 
 ## Phase 10. Server
 
-Build the server on Socket.IO (AD-8), with one room per game (TD-7). Keep each game as its seed and
-action log (AD-9, TR-4). Build creating and joining games (FR-5, FR-6, FR-7, FR-8, FR-9, FR-10,
-FR-11, FR-12, FR-13). Check every action with the engine (TR-9), make every draw on the server
-(TR-10), and send each player a filtered player view after every action (TR-11, TR-12, TD-8).
+Build the server on Socket.IO (AD-8), with one room per game (TD-7). Keep each game in memory
+(AD-11) as its seed and action log (AD-9, TR-4).
+
+Build game setup (FR-5, FR-104, FR-105, FR-106, FR-107, FR-11, FR-12, FR-108, FR-13, FR-109,
+FR-110) and player links (FR-111, FR-112, FR-113, TR-13, TR-14). Check every action with the engine
+(TR-9), make every draw on the server (TR-10), and send each player a filtered player view after
+every action (TR-11, TR-12, TD-8). Wait for each choice with no time limit (FR-115). Remove games
+when their game lifetime passes (FR-116, FR-117, TD-11).
 
 Add tests for:
 
 - The server rejects an illegal action.
+- A connection opened with one player's link can't act for another player (TR-14).
 - No player view holds another player's hand, the seed or the random number generator's state.
 - Two games on one server stay separate (FR-2).
+- Opening a player link a second time moves the game to the newest connection.
+- A game is removed once its game lifetime passes, and its player links then get the timed-out
+  message.
 
-Done when these tests pass and a script can create a game, join it from a second connection and
-play a turn.
+Done when these tests pass and a script can set up a game, open two of its player links on
+separate connections and play a turn.
 
 ## Phase 11. Client
 
-Build the game screen (FR-92, FR-93, FR-94, FR-95, FR-96, FR-97, FR-98, FR-99, FR-100, FR-101,
-FR-102, FR-103) with tiles drawn in code (TD-10), and the screens to create and join a game. Show
-options from the rules the client is allowed to hold (TD-9).
+Build the setup screen, and the game screen (FR-92, FR-93, FR-94, FR-95, FR-96, FR-97, FR-98,
+FR-99, FR-100, FR-101, FR-102, FR-103, FR-118, FR-119) with tiles drawn as SVG (TD-10). Show the
+player their options through the engine (TD-9). End each turn on its
+own, with no undo (FR-120, FR-121). Show the illegal-move message when the server rejects an
+action (TR-15).
 
-Done when two people, each in their own desktop browser, can create a game, join it, and play to
-the end with the winners shown.
+Done when two people, each in their own desktop browser, can set up a game, open their player
+links, and play to the end with the winners and the final board shown.
 
 ## Retiring this blueprint
 
