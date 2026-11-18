@@ -184,6 +184,14 @@ action (TR-15).
 Done when two people, each in their own desktop browser, can set up a game, open their player
 links, and play to the end with the winners and the final board shown.
 
+## Phase 12. Container
+
+Have the server serve the built client (AD-13). Write the container build, build the image and run
+it (AD-12).
+
+Done when two people, each in their own desktop browser, play a game to the end through the
+running container.
+
 ## Retiring this blueprint
 
 Retire it when every phase is done: archive this doc with its date and a line saying it isn't kept

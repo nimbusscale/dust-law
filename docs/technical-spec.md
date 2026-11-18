@@ -27,13 +27,25 @@ the code are comments there instead.
 
 **AD-1.** TypeScript in strict mode for the engine, the server and the client.
 
+*Why:* agents write the code, so it should leave them as few options and as little to interpret as
+possible. Strict static types do that. One language also lets the server and the client share the
+engine and its types.
+
 **AD-2.** React for the client.
+
+*Why:* it's common and well known, so agents and people can work on the client easily.
 
 **AD-3.** Vite builds the client.
 
+*Why:* it's the usual build tool for React and TypeScript, and needs little setup.
+
 **AD-4.** Vitest runs the tests.
 
+*Why:* it works with Vite and TypeScript with little setup.
+
 **AD-5.** Node runs the server.
+
+*Why:* the server then runs the same TypeScript engine as the client.
 
 **AD-6.** The code is split into three parts: the engine, the server and the client.
 
@@ -62,6 +74,16 @@ by replaying the log through the engine.
 
 **AD-11.** Games live only in the server's memory.
 
+*Why:* it's the simplest option, and a game is kept only for its game lifetime.
+
+**AD-12.** The game ships as one container image.
+
+*Why:* it can then run anywhere, such as on a desktop or a cloud server.
+
+**AD-13.** One Node server process serves both the built client and the Socket.IO connections.
+
+*Why:* there's then one thing to start and one port to open.
+
 ## T-SEC-3. Code standards
 
 **CS-1.** Use common, well-maintained libraries, never obscure or abandoned packages.
@@ -83,8 +105,13 @@ game state every time.
 **TD-1.** The engine takes a game state and an action, and either rejects the action or returns
 the resulting game state. It meets TR-1 and TR-3.
 
+*Why:* a function like this is easy to test, and replaying an action log is just applying each
+action in turn.
+
 **TD-2.** The random number generator is passed into the engine, which uses no other source of
 randomness. It meets TR-2 and TR-3.
+
+*Why:* tests can pass in a generator with a fixed seed and get the same game every time.
 
 ## T-SEC-5. Tile model and shape catalog
 
@@ -159,13 +186,20 @@ connection it came on.
 **TD-8.** After the server applies an action, it sends a new player view to every player in the
 game. It meets FR-4.
 
+*Why:* sending the whole player view is simpler than sending only what changed, and a game's
+state is small.
+
 ## T-SEC-7. Client
 
 **TD-9.** The client imports the engine and uses it to highlight where a tile fits and to offer
 only legal choices, with no rules logic of its own. The server's check under TR-9 always has the
 final say. It meets FR-97 and FR-99.
 
+*Why:* the highlights then always match what the server allows, since both use the same rules.
+
 **TR-15.** When the server rejects an action, the client shall tell the player the move wasn't
 legal and return them to that choice.
 
 **TD-10.** Tiles are drawn as SVG in code, with no image files. It meets FR-92.
+
+*Why:* SVG stays sharp at any size, so tiles look right as players zoom the board (FR-93).
