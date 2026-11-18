@@ -16,6 +16,7 @@ the code are comments there instead.
 - **Client.** The part of the code that runs in each player's browser. It shows the game and sends
   the player's actions.
 - **Link code.** The random code in a player link that says which game and player it opens.
+- **Game record.** A game's game setup, seed and action log.
 - **Engine.** The part of the code that holds the game rules and the game state.
 - **Player view.** The copy of a game's state that the server sends to one player.
 - **Random number generator.** The seeded source of random numbers for one game.
@@ -63,10 +64,10 @@ has no network code, no DOM and no React.
 (FR-4). Socket.IO adds rooms, which keep each game separate (FR-2), and automatic reconnecting,
 which helps a player get back into their game (FR-112).
 
-**AD-9.** The server keeps each game as its game setup, its seed and its action log, and gets the
-current state by replaying the log through the engine.
+**AD-9.** The server keeps each game as its game record, and gets the current state by replaying
+the game record through the engine.
 
-*Why:* it makes any game easy to reproduce, test and debug. Saving a game only needs that list.
+*Why:* it makes any game easy to reproduce, test and debug. Saving a game only needs its game record.
 
 **AD-10.** The code is one npm workspace with three packages: engine, server and client.
 
@@ -97,8 +98,8 @@ current state by replaying the log through the engine.
 **TR-2.** The engine shall take every random choice in a game from that game's one random number
 generator, including the turn order, the bounty picks and every choice the tile generator makes.
 
-**TR-3.** When the engine replays a game's game setup, seed and action log, the engine shall produce
-the same game state every time.
+**TR-3.** When the engine replays a game record, the engine shall produce the same game state every
+time.
 
 **TD-1.** The engine takes a game state and an action, and either rejects the action or returns
 the resulting game state. It meets TR-1 and TR-3.

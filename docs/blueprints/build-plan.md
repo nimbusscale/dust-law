@@ -152,7 +152,7 @@ Done when these tests pass and the engine has a test for every rule it carries o
 ## Phase 10. Server
 
 Build the server on Socket.IO (AD-8), with one room per game (TD-7). Keep each game in memory
-(AD-11) as its game setup, seed and action log (AD-9, TR-4).
+(AD-11) as its game record (AD-9, TR-4).
 
 Build game setup in the host's browser (TD-12) (FR-5, FR-123, FR-104, FR-124, FR-125, FR-105,
 FR-106, FR-107, FR-126, FR-11, FR-12, FR-13, FR-109,
