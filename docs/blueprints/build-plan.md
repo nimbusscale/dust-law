@@ -58,7 +58,7 @@ Add tests for:
 - On a board built so only a few shapes fit, every draw is one of them.
 - On an open board, a large number of draws comes out close to the shape weights.
 - An outpost never gets a hostile.
-- The same seed and the same moves give the same tiles (TR-2).
+- The same seed and the same actions give the same tiles (TR-2).
 
 Done when these tests pass.
 
@@ -133,7 +133,7 @@ Done when these tests pass.
 
 Build the engine's entry point (TD-1): game setup (FR-14, FR-15, FR-16, FR-17, FR-18, FR-19,
 FR-20, FR-21), turns (FR-40, FR-45, FR-51), stuck hands (FR-46, FR-47, FR-48, FR-49, FR-50), the
-draw step and the empty tile supply (FR-38, FR-39), the end of the game (FR-87, FR-88), final
+draw step and the empty tile supply (FR-38), the end of the game (FR-87, FR-88), final
 scoring (FR-89, FR-90) and winners (FR-91).
 
 Add tests for:
@@ -152,9 +152,10 @@ Done when these tests pass and the engine has a test for every rule it carries o
 ## Phase 10. Server
 
 Build the server on Socket.IO (AD-8), with one room per game (TD-7). Keep each game in memory
-(AD-11) as its seed and action log (AD-9, TR-4).
+(AD-11) as its game setup, seed and action log (AD-9, TR-4).
 
-Build game setup (FR-5, FR-104, FR-105, FR-106, FR-107, FR-11, FR-12, FR-108, FR-13, FR-109,
+Build game setup in the host's browser (TD-12) (FR-5, FR-123, FR-104, FR-124, FR-125, FR-105,
+FR-106, FR-107, FR-126, FR-11, FR-12, FR-13, FR-109,
 FR-110) and player links (FR-111, FR-112, FR-113, TR-13, TR-14). Check every action with the engine
 (TR-9), make every draw on the server (TR-10), and send each player a filtered player view after
 every action (TR-11, TR-12, TD-8). Wait for each choice with no time limit (FR-115). Remove games
@@ -167,19 +168,33 @@ Add tests for:
 - No player view holds another player's hand, the seed or the random number generator's state.
 - Two games on one server stay separate (FR-2).
 - Opening a player link a second time moves the game to the newest connection.
-- A game is removed once its game lifetime passes, and its player links then get the timed-out
-  message.
+- A game is removed once its game lifetime passes, and its player links then get the
+  no-longer-available message.
 
 Done when these tests pass and a script can set up a game, open two of its player links on
 separate connections and play a turn.
 
 ## Phase 11. Client
 
-Build the setup screen, and the game screen (FR-92, FR-93, FR-94, FR-95, FR-96, FR-97, FR-98,
-FR-99, FR-100, FR-101, FR-102, FR-103, FR-118, FR-119) with tiles drawn as SVG (TD-10). Show the
+Build the setup screen, labeling the host's own row "You", and the game screen (FR-92, FR-93,
+FR-94, FR-95, FR-97, FR-98, FR-99, FR-100, FR-101, FR-102, FR-103, FR-118, FR-119, FR-127,
+FR-128) with tiles rendered as SVG (TD-10). No screen marks any player as the host. Show the
 player their options through the engine (TD-9). End each turn on its
-own, with no undo (FR-120, FR-121). Show the illegal-move message when the server rejects an
-action (TR-15).
+own, with no undo (FR-120, FR-121). Show the rejection message when the server rejects an
+action (FR-129).
+
+Use these player colors (FR-107):
+
+| Color | Hex |
+|---|---|
+| Red | `#d62728` |
+| Blue | `#1f77b4` |
+| Green | `#2ca02c` |
+| Orange | `#ff7f0e` |
+| Purple | `#9467bd` |
+| Teal | `#17becf` |
+| Pink | `#e377c2` |
+| Brown | `#8c564b` |
 
 Done when two people, each in their own desktop browser, can set up a game, open their player
 links, and play to the end with the winners and the final board shown.

@@ -8,9 +8,6 @@
 | Technical spec | `docs/technical-spec.md` |
 | Blueprints | `docs/blueprints/` |
 
-Use the writing-project-docs skill for any change to these docs, and run its check script before
-counting a doc change as done.
-
 ## When work is done
 
 A change is done when all of these hold:

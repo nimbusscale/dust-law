@@ -60,11 +60,11 @@ has no network code, no DOM and no React.
 **AD-8.** The server and the clients talk through Socket.IO, over WebSockets.
 
 *Why:* a WebSocket stays open, so the server can push a new player view the moment anyone acts
-(FR-4). Socket.IO adds rooms and automatic reconnecting. Rooms keep each game separate (FR-2), and
-plain WebSockets would mean writing both ourselves.
+(FR-4). Socket.IO adds rooms, which keep each game separate (FR-2), and automatic reconnecting,
+which helps a player get back into their game (FR-112).
 
-**AD-9.** The server keeps each game as its seed plus its action log, and gets the current state
-by replaying the log through the engine.
+**AD-9.** The server keeps each game as its game setup, its seed and its action log, and gets the
+current state by replaying the log through the engine.
 
 *Why:* it makes any game easy to reproduce, test and debug. Saving a game only needs that list.
 
@@ -97,10 +97,8 @@ by replaying the log through the engine.
 **TR-2.** The engine shall take every random choice in a game from that game's one random number
 generator, including the turn order, the bounty picks and every choice the tile generator makes.
 
-**TR-3.** When the engine replays a game's seed and action log, the engine shall produce the same
-game state every time.
-
-**TR-4.** When a game starts, the server shall pick the game's seed.
+**TR-3.** When the engine replays a game's game setup, seed and action log, the engine shall produce
+the same game state every time.
 
 **TD-1.** The engine takes a game state and an action, and either rejects the action or returns
 the resulting game state. It meets TR-1 and TR-3.
@@ -156,7 +154,7 @@ them change without touching game logic.
 **TR-9.** When the server receives an action, the server shall apply it only if the rules in
 F-SEC-3, F-SEC-6, F-SEC-7, F-SEC-8 and F-SEC-11 allow it.
 
-*Why:* a client someone has changed must not be able to make an illegal move.
+*Why:* a client someone has changed must not be able to make an illegal action.
 
 **TR-10.** The server shall make every draw itself, never letting a client decide what a player
 draws.
@@ -169,15 +167,24 @@ generator.
 **TR-12.** The server shall put in each player view only the hand contents that FR-95 lets that
 player see.
 
-**TR-13.** The server shall give each player link a random link code long enough that no one can
-open a player's game by guessing or changing a link.
+**TR-4.** When a game starts, the server shall pick the game's seed.
+
+**TR-13.** The server shall make each link code from at least 128 bits taken from a
+cryptographically secure random source.
+
+*Why:* no one can then open a player's game by guessing or changing a link.
 
 **TR-14.** The server shall apply an action only for the player whose player link opened the
 connection it came on.
 
 **TD-11.** The game lifetime is a server setting, 24 hours by default. It meets FR-116.
 
-*Why:* it can then be changed after playtesting without a code change.
+*Why:* it can then be adjusted later without a code change.
+
+**TD-12.** A game setup stays in the host's browser until the host starts the game, and the server
+creates the game only then. It meets FR-116.
+
+*Why:* the server then holds only started games, so the game lifetime covers every game it holds.
 
 **TD-7.** Each game is its own Socket.IO room. It meets FR-2.
 
@@ -197,9 +204,6 @@ final say. It meets FR-97 and FR-99.
 
 *Why:* the highlights then always match what the server allows, since both use the same rules.
 
-**TR-15.** When the server rejects an action, the client shall tell the player the move wasn't
-legal and return them to that choice.
-
-**TD-10.** Tiles are drawn as SVG in code, with no image files. It meets FR-92.
+**TD-10.** Tiles are rendered as SVG in code, with no image files. It meets FR-92.
 
 *Why:* SVG stays sharp at any size, so tiles look right as players zoom the board (FR-93).
