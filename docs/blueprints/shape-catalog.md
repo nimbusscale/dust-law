@@ -1,7 +1,12 @@
+---
+status: active
+retired:
+---
+
 # Shape catalog data
 
-A blueprint, written to build from before the code exists. Once the code is built, it's retired:
-see `references/blueprint.md` in the writing-project-docs skill.
+A blueprint, written to build from before the code exists. Once the code is built, it's retired,
+and the status above says so.
 
 This is the content of the data file that TD-5 calls for: every shape, its segments, its weight,
 and the hostile chance. It also holds what the tile type records, how a shape rotates, and which

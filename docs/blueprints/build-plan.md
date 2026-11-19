@@ -1,7 +1,12 @@
+---
+status: active
+retired:
+---
+
 # Build plan
 
-A blueprint, written to build from before the code exists. Once the code is built, it's retired:
-see `references/blueprint.md` in the writing-project-docs skill.
+A blueprint, written to build from before the code exists. Once the code is built, it's retired,
+and the status above says so.
 
 The sequence to build the game in, phase by phase. Each phase names the spec items it builds, the
 tests it adds, and what shows it's done. The engine comes first and is finished and tested before
