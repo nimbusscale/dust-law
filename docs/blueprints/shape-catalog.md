@@ -4,8 +4,10 @@ A blueprint, written to build from before the code exists. Once the code is buil
 see `references/blueprint.md` in the writing-project-docs skill.
 
 This is the content of the data file that TD-5 calls for: every shape, its segments, its weight,
-and the hostile chance. Building the file retires this blueprint. From then on the data file is
-the only home of these values.
+and the hostile chance. It also holds what the tile type records, how a shape rotates, and which
+border positions face each other across a shared edge. Building the data file, the tile type, the
+rotation code and the code that joins wasteland segments retires this blueprint. From then on
+those are the only home of these facts.
 
 ## How to read the tables
 
@@ -17,6 +19,16 @@ the only home of these values.
   the tile's junction.
 - Each wasteland segment is a list of border positions, followed by the bastion segments it
   borders, if any.
+
+## The tile type
+
+A tile records the edge type of each of its four edges, and its segments:
+
+- A bastion segment has an id and the edges it covers.
+- A road segment lists the edges it touches. A road segment with one edge also names the junction
+  or the bastion segment it ends at.
+- A wasteland segment lists its border positions and the bastion segments it borders.
+- An outpost is a flag on the tile.
 
 ## Settings
 
@@ -71,6 +83,16 @@ two or three times for 180° and 270°.
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | To | E | S | W | N | EN | ES | SE | SW | WS | WN | NW | NE |
 
+## Facing border positions
+
+Wasteland segments on adjacent tiles join where their border positions face each other across the
+shared edge (FR-29). This follows from how the technical spec's Terms name the border positions.
+
+| Shared edge | Facing pairs |
+|---|---|
+| A tile's north edge and the south edge of the tile north of it | NE faces SE, NW faces SW |
+| A tile's east edge and the west edge of the tile east of it | EN faces WN, ES faces WS |
+
 ## Retiring this blueprint
 
 - Write the data file from the tables above, and have the engine load it (TD-5).
@@ -78,4 +100,6 @@ two or three times for 180° and 270°.
   describes its format.
 - Put the rotation table in the engine's rotation code, with a test that four rotations give back
   the original shape.
+- Write the tile type from "The tile type" above.
+- Put the facing table in the code that joins wasteland segments, with a test for each pair.
 - Archive this doc with its date and a line saying it isn't kept up to date.

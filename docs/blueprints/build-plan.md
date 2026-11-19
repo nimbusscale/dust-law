@@ -18,7 +18,7 @@ build.
 
 ## Phase 2. Tile model and shape catalog
 
-Write the tile types (TD-3) and the data file from the shape catalog blueprint (TD-5), and have the
+Write the tile type and the data file from the shape catalog blueprint (TD-5), and have the
 engine load it. Write rotation (FR-27) from the rotation table in that blueprint.
 
 Add tests for:
@@ -64,9 +64,10 @@ Done when these tests pass.
 
 ## Phase 5. Features
 
-Join segments into features as tiles are laid (FR-28, FR-29, FR-30, TD-4), carry hostiles with
-their feature (FR-31), detect finished bastions, roads and outposts (FR-56, FR-57, FR-58), and
-count tiles (FR-62, FR-63).
+Join segments into features as tiles are laid (FR-28, FR-29, FR-30), with wasteland segments
+joined by the facing table in the shape catalog blueprint. Carry hostiles with their feature
+(FR-31), detect finished bastions, roads and outposts (FR-56, FR-57, FR-58), and count tiles
+(FR-62, FR-63).
 
 Add tests for:
 

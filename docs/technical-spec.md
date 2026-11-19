@@ -114,16 +114,6 @@ randomness. It meets TR-2 and TR-3.
 
 ## T-SEC-5. Tile model and shape catalog
 
-**TD-3.** A tile records the edge type of each of its four edges and its segments. A bastion
-segment has an id and the edges it covers. A road segment lists the edges it touches, and a road
-segment with one edge also names the junction or the bastion segment it ends at. A wasteland
-segment lists its border positions and the bastion segments it borders. An outpost is a flag on
-the tile. It meets FR-22, FR-25 and FR-28.
-
-**TD-4.** Wasteland segments on adjacent tiles join where their border positions face each other
-across the shared edge: NE faces SE and NW faces SW across a north edge, and EN faces WN and ES
-faces WS across an east edge. It meets FR-29.
-
 **TR-5.** The shape catalog shall put each border position on a road edge or a wasteland edge in
 exactly one wasteland segment of its shape, and no border position on a bastion edge in any.
 
