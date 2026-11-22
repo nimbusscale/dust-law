@@ -517,6 +517,8 @@ nothing that marks them as the host.
 **FR-116.** When a game's lifetime has passed since the host started it, the app shall remove the
 game, whether or not it has ended, without telling anyone.
 
+**FR-131.** The app shall use a game lifetime of 24 hours by default.
+
 **FR-117.** When someone opens a player link for a game the app doesn't hold, the app shall tell
 them the game is no longer available, and that it may have timed out or the server may have
 restarted.

@@ -71,7 +71,7 @@ the game record through the engine.
 
 **AD-10.** The code is one npm workspace with three packages: engine, server and client.
 
-*Why:* the server and the client both import the engine (TD-9).
+*Why:* the server and the client both import the engine.
 
 **AD-11.** Games live only in the server's memory.
 
@@ -164,7 +164,8 @@ cryptographically secure random source.
 **TR-14.** The server shall apply an action only for the player whose player link opened the
 connection it came on.
 
-**TD-11.** The game lifetime is a server setting, 24 hours by default. It meets FR-116.
+**TD-11.** The game lifetime is a server setting, with FR-131's 24 hours as its default. It meets
+FR-116 and FR-131.
 
 *Why:* it can then be adjusted later without a code change.
 
