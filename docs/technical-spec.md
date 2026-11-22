@@ -136,10 +136,6 @@ the engine loads, not in code. It meets FR-22, FR-33 and FR-34.
 *Why:* the weights and the hostile chance are expected to change after playtesting, and this lets
 them change without touching game logic.
 
-**TD-6.** The tile generator's fit check looks only at shapes, never at hostiles. It meets FR-32.
-
-*Why:* a hostile never changes whether a tile fits.
-
 ## T-SEC-6. Server
 
 **TR-9.** When the server receives an action, the server shall apply it only if the rules in
@@ -173,7 +169,7 @@ connection it came on.
 *Why:* it can then be adjusted later without a code change.
 
 **TD-12.** A game setup stays in the host's browser until the host starts the game, and the server
-creates the game only then. It meets FR-116.
+starts holding the game only then. It meets FR-116.
 
 *Why:* the server then holds only started games, so the game lifetime covers every game it holds.
 
@@ -189,9 +185,9 @@ state is small.
 
 ## T-SEC-7. Client
 
-**TD-9.** The client imports the engine and uses it to highlight where a tile fits and to offer
-only legal choices, with no rules logic of its own. The server's check under TR-9 always has the
-final say. It meets FR-97 and FR-99.
+**TD-9.** The client imports the engine and uses it to highlight where a tile can be laid and to
+offer only legal choices, with no rules logic of its own. The server's check under TR-9 always has
+the final say. It meets FR-97 and FR-99.
 
 *Why:* the highlights then always match what the server allows, since both use the same rules.
 

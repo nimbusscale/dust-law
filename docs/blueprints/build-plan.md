@@ -33,11 +33,11 @@ Add tests for:
 - Rotating any shape four times gives back the original, and one rotation moves edges, segments,
   border positions and hostiles together.
 
-Done when these tests pass and the shape catalog blueprint is retired.
+Done when these tests pass.
 
 ## Phase 3. Board and placement
 
-Build the board with no edge (FR-44), the check that a space has an adjacent tile (FR-41), edge
+Build the board with no boundary (FR-44), the check that a space has an adjacent tile (FR-41), edge
 matching (FR-42), outpost spacing (FR-43), and a fit check that finds every empty space and
 rotation where a tile can be laid.
 
@@ -54,8 +54,9 @@ Done when these tests pass.
 ## Phase 4. Tile generator
 
 Build the tile generator with the random number generator passed in (TD-2): pick only shapes that
-fit (FR-32, TD-6), weight the pick (FR-33), roll for a hostile (FR-34), pick its kind (FR-35) and
-its segment (FR-36), and hand the tile over in its reference orientation (FR-37).
+fit (FR-32), weight the pick (FR-33), roll for a hostile (FR-34), pick its kind (FR-35) and its
+segment (FR-36), and hand the tile over in its reference orientation (FR-37). The fit check ignores
+hostiles, since no rule in F-SEC-6 looks at them. Say so in a comment on the fit check.
 
 Add tests for:
 
@@ -83,7 +84,7 @@ Add tests for:
 - A finished outpost, including one finished by a tile at its corner.
 - A road that ends at an outpost leaves the outpost's tile out of its count.
 
-Done when these tests pass.
+Done when these tests pass and the shape catalog blueprint is retired.
 
 ## Phase 6. Enforcers, control and points
 
@@ -114,8 +115,8 @@ Add tests for:
   bastions finished by one tile.
 - A garrison bonus for a road scored by the same tile that finished the bastion, and none for a
   road scored before the garrison was left.
-- A road that loops back to a garrisoned bastion pays once and cancels one hostile.
-- A road between two garrisoned bastions cancels two hostiles.
+- A road that loops back to a bastion with a garrison pays once and cancels one hostile.
+- A road between two bastions that each hold a garrison cancels two hostiles.
 - A garrison whose owner has no enforcer on the feature cancels nothing.
 
 Done when these tests pass.
@@ -137,7 +138,7 @@ Done when these tests pass.
 
 ## Phase 9. Setup, turns and the end of the game
 
-Build the engine's entry point (TD-1): game setup (FR-14, FR-15, FR-16, FR-17, FR-18, FR-19,
+Build the engine's entry point (TD-1): starting a game (FR-14, FR-15, FR-16, FR-17, FR-18, FR-19,
 FR-20, FR-21), turns (FR-40, FR-45, FR-51), stuck hands (FR-46, FR-47, FR-48, FR-49, FR-50), the
 draw step and the empty tile supply (FR-38), the end of the game (FR-87, FR-88), final
 scoring (FR-89, FR-90) and winners (FR-91).
@@ -160,12 +161,13 @@ Done when these tests pass and the engine has a test for every rule it carries o
 Build the server on Socket.IO (AD-8), with one room per game (TD-7). Keep each game in memory
 (AD-11) as its game record (AD-9, TR-4).
 
-Build game setup in the host's browser (TD-12) (FR-5, FR-123, FR-104, FR-124, FR-125, FR-105,
-FR-106, FR-107, FR-126, FR-11, FR-12, FR-13, FR-109,
-FR-110) and player links (FR-111, FR-112, FR-113, TR-13, TR-14). Check every action with the engine
-(TR-9), make every draw on the server (TR-10), and send each player a filtered player view after
-every action (TR-11, TR-12, TD-8). Wait for each choice with no time limit (FR-115). Remove games
-when their game lifetime passes (FR-116, FR-117, TD-11).
+When the host starts a game, take its game setup from the host's browser (TD-12), check it (FR-11,
+FR-13, FR-105, FR-106, FR-126), and start holding the game. Give the host the game's player links
+once (FR-109), and no controls after that (FR-110). Build player links (FR-111, FR-112, FR-113,
+TR-13, TR-14). Check every action with the engine (TR-9), make every draw on the server (TR-10), and
+send each player a filtered player view after every action (TR-11, TR-12, TD-8). Wait for each
+choice with no time limit (FR-115). Remove games when their game lifetime passes (FR-116, FR-117,
+TD-11).
 
 Add tests for:
 
@@ -182,12 +184,13 @@ separate connections and play a turn.
 
 ## Phase 11. Client
 
-Build the setup screen, labeling the host's own row "You", and the game screen (FR-92, FR-93,
-FR-94, FR-95, FR-97, FR-98, FR-99, FR-100, FR-101, FR-102, FR-103, FR-118, FR-119, FR-127,
-FR-128) with tiles rendered as SVG (TD-10). No screen marks any player as the host. Show the
-player their options through the engine (TD-9). End each turn on its
-own, with no undo (FR-120, FR-121). Show the rejection message when the server rejects an
-action (FR-129).
+Build the setup screen, which keeps the game setup in the host's browser until start (TD-12) (FR-5,
+FR-123, FR-104, FR-124, FR-125, FR-107, FR-12), labeling the host's own row "You". Build the game
+screen (FR-92, FR-93, FR-94, FR-95, FR-97, FR-98, FR-99, FR-100, FR-101, FR-102, FR-103, FR-118,
+FR-119, FR-127, FR-128) with tiles rendered as SVG (TD-10). Show the host the way any other player
+is shown (FR-130). Show the player their options through the engine (TD-9). End each turn on its
+own, with no undo (FR-120, FR-121). Show the rejection message when the server rejects an action
+(FR-129).
 
 Use these player colors (FR-107):
 

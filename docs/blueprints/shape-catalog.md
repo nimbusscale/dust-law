@@ -24,6 +24,7 @@ those are the only home of these facts.
   the tile's junction.
 - Each wasteland segment is a list of border positions, followed by the bastion segments it
   borders, if any.
+- No column lists the `outpost` shape's one outpost segment.
 
 ## The tile type
 
@@ -33,7 +34,7 @@ A tile records the edge type of each of its four edges, and its segments:
 - A road segment lists the edges it touches. A road segment with one edge also names the junction
   or the bastion segment it ends at.
 - A wasteland segment lists its border positions and the bastion segments it borders.
-- An outpost is a flag on the tile.
+- An outpost tile has one outpost segment and no other segment.
 
 ## Settings
 
@@ -46,7 +47,7 @@ A tile records the edge type of each of its four edges, and its segments:
 | Id | N | E | S | W | Bastion segments | Road segments | Wasteland segments | Weight |
 |---|---|---|---|---|---|---|---|---|
 | `open` | W | W | W | W | none | none | {NW, NE, EN, ES, SE, SW, WS, WN} | 8 |
-| `outpost` | O | O | O | O | none (outpost flag) | none | none | 7 |
+| `outpost` | O | O | O | O | none | none | none | 7 |
 
 ## Road shapes
 

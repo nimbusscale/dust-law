@@ -13,6 +13,8 @@ The functional spec: what the app should do, in the user's terms. Requirements a
 - **Borders.** A wasteland borders a bastion when one of the wasteland's segments touches one of
   the bastion's segments on the same tile.
 - **Bounty.** A goal that any player can race to meet for points (F-SEC-12).
+- **Bounty in play.** A bounty that FR-19 picked for a game and that FR-83 hasn't taken out of
+  play.
 - **Claim.** To be the first to meet a bounty and take its points.
 - **Control.** Which side takes a feature's points when it's scored (F-SEC-10).
 - **Current player.** The player whose turn it is.
@@ -40,7 +42,6 @@ The functional spec: what the app should do, in the user's terms. Requirements a
   points totals.
 - **Garrison.** A judge that its owner left behind in a finished bastion (F-SEC-11).
 - **Garrison bonus.** Points that a garrison's owner gets from a road (FR-76).
-- **Garrisoned bastion.** A bastion with at least one garrison in it.
 - **Gate.** A point inside a tile where a road segment ends at a bastion segment.
 - **Hand.** The tiles a player holds, ready to lay.
 - **Host.** The person who sets up a game.
@@ -51,7 +52,7 @@ The functional spec: what the app should do, in the user's terms. Requirements a
   worked out.
 - **Junction.** A point inside a tile where three or four road segments end.
 - **Lay.** To place a tile on the board.
-- **Outpost.** A lone station that fills its whole tile.
+- **Outpost.** A lone station.
 - **Player.** A person taking part in a game.
 - **Player color.** The color a player is given in a game.
 - **Player link.** The web link that opens a game as one of its players.
@@ -63,8 +64,8 @@ The functional spec: what the app should do, in the user's terms. Requirements a
   a road, a warden on an outpost, or a ranger in a wasteland.
 - **Rotation.** Which way round a tile is laid: as drawn, or rotated by 90°, 180° or 270°.
 - **Score.** To work out control of a feature and award its points (F-SEC-10).
-- **Segment.** The part of one feature that is on one tile. A tile can hold several segments, and
-  each one is separate from the others on that tile.
+- **Segment.** One piece of a bastion, road, outpost or wasteland inside one tile. A tile can hold
+  several segments, and each one is separate from the others on that tile.
 - **Shape.** A tile layout: the edge type of each edge and the segments inside the tile.
 - **Shape catalog.** The list of every shape the app can create, with each shape's weight.
 - **Shape weight.** A number given to each shape in the shape catalog that sets how likely it is
@@ -243,12 +244,12 @@ surrounding spaces holds an outpost.
 *Scenario:* Given an outpost on the board, when a player lays a tile with a bastion segment in a
 space that touches the outpost only at a corner, then the app allows it.
 
-**FR-44.** The board shall grow in every direction as tiles are laid, with no edge and no fixed
-size.
+**FR-44.** The board shall grow in every direction as tiles are laid, with no boundary and no
+fixed size.
 
 *Why:* FR-32 can always find a shape that fits only because there is always an empty space with
-just one adjacent tile, such as the space above the topmost tile. A board with an edge could run
-out of such spaces.
+just one adjacent tile, such as the space above the topmost tile. A board with a boundary could
+run out of such spaces.
 
 ## F-SEC-7. Turns
 
@@ -407,8 +408,8 @@ is cancelled and the garrison owner ties with the hostile side.
 
 ## F-SEC-12. Bounties
 
-**FR-79.** When a turn's bounty step comes, the app shall check every bounty not yet claimed for
-every player, except All Hands, which it checks only for the current player.
+**FR-79.** When a turn's bounty step comes, the app shall check every bounty in play for every
+player, except All Hands, which it checks only for the current player.
 
 *Scenario:* Given Frontier in play and a player who has never got points from an outpost, when one
 tile finishes two outposts that the player controls, then the player claims Frontier that turn.
@@ -426,11 +427,11 @@ tile finishes two outposts that the player controls, then the player claims Fron
 | Lockdown | The player has at least two garrisons of their own on the board. | 5 |
 | All Hands | All of the player's enforcers are on the board, garrisons included. | 4 |
 
-**FR-81.** Where one player meets an unclaimed bounty in a bounty step, the app shall award that
+**FR-81.** Where one player meets a bounty in play in a bounty step, the app shall award that
 player the bounty's points.
 
-**FR-82.** Where two or more players meet the same unclaimed bounty in the same bounty step, the app
-shall split its points evenly among them, rounded down.
+**FR-82.** Where two or more players meet the same bounty in play in the same bounty step, the
+app shall split its points evenly among them, rounded down.
 
 **FR-83.** When a bounty is claimed, the app shall take it out of play for the rest of the game.
 
@@ -481,7 +482,7 @@ deployed enforcer, with garrisons marked as garrisons.
 another player's hand.
 
 **FR-97.** While a player has picked a tile, the app shall highlight every empty space where the
-tile fits in its current rotation.
+rules in F-SEC-6 let the tile be laid in its current rotation.
 
 **FR-98.** The app shall let a player choose only a highlighted space to lay a picked tile.
 
@@ -507,6 +508,9 @@ bounties and wastelands.
 anyone who opens one of its player links.
 
 **FR-119.** The app shall show the final board on the end screen.
+
+**FR-130.** The app shall show the host on every screen the way it shows any other player, with
+nothing that marks them as the host.
 
 ## F-SEC-15. Game lifetime
 
