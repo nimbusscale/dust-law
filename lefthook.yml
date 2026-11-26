@@ -1,0 +1,21 @@
+# Claude Code asks the owner before each edit to this file, so an agent can't weaken a check to
+# make it pass (CS-3).
+
+# Standard ** matching: packages/**/* covers files at any depth under packages.
+glob_matcher: doublestar
+
+pre-commit:
+  commands:
+    check:
+      # Only when a staged file can change the check's result, so a commit that changes only docs
+      # skips it.
+      glob:
+        - "packages/**/*"
+        - "package.json"
+        - "package-lock.json"
+        - "tsconfig*.json"
+        - "eslint.config.mjs"
+        - ".prettierrc.json"
+        - ".prettierignore"
+        - "Makefile"
+      run: make check

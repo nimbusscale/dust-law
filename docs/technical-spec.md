@@ -91,6 +91,27 @@ the game record through the engine.
 
 **CS-2.** Every rule the engine carries out has a unit test.
 
+**CS-3.** When code fails a check, such as a size limit or a lint rule, the code changes to pass
+it, and the check stays the same.
+
+*Why:* the limits keep the code modular. Raising one to fit the code takes that pressure away.
+
+*Examples:*
+
+- A function with too many branches becomes two functions with clear names.
+- A file over the line limit becomes two modules, each with one job.
+
+**CS-4.** A fix for a bug comes with a test that fails without the fix and passes with it.
+
+**CS-5.** Names in code use the specs' terms, such as `GameRecord` for a game record or
+`PlayerView` for a player view.
+
+*Why:* a reader finds the code that carries out a spec item by searching for the item's terms.
+
+**CS-6.** Data that reaches the code at runtime from outside it, such as an action a client sends
+to the server, or a server setting, is parsed with a schema where it enters, and never asserted to
+a type.
+
 ## T-SEC-4. Engine
 
 **TR-1.** The engine shall run and be tested on its own, without the server or the client.
@@ -183,6 +204,11 @@ game. It meets FR-4.
 
 *Why:* sending the whole player view is simpler than sending only what changed, and a game's
 state is small.
+
+**TD-13.** Zod checks data that reaches the code from outside it. It meets TR-9.
+
+*Why:* one Zod schema gives both the check at runtime and the TypeScript type, so the two can't
+drift apart. Zod is also the most common library for this (CS-1).
 
 ## T-SEC-7. Client
 

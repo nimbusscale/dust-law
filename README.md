@@ -13,6 +13,11 @@ Dust Law is a practice project for issue-driven development with coding agents. 
 be good enough for a small group to play and test. Clarity and correctness matter more than
 polish.
 
+## Setup
+
+Run `make setup` to install the packages, then `npx lefthook install` once to add the pre-commit
+hook, which runs `make check`.
+
 ## Docs
 
 - [Functional spec](docs/functional-spec.md): what the game does, including every rule.

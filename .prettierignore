@@ -1,0 +1,4 @@
+package-lock.json
+
+# Docs are wrapped by hand, so Prettier leaves them alone.
+*.md
