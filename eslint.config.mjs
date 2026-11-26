@@ -9,25 +9,31 @@ import noBarrelFiles from "eslint-plugin-no-barrel-files";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
-const NAMING_CONVENTION = [
-  "error",
-  { selector: "default", format: ["camelCase"] },
-  { selector: "typeLike", format: ["PascalCase"] },
-  // Lint can't tell a fixed value from any other top-level const, so both are allowed.
-  {
-    selector: "variable",
-    modifiers: ["const", "global"],
-    format: ["camelCase", "UPPER_CASE"],
-  },
-  { selector: "enumMember", format: ["UPPER_CASE"] },
-  { selector: "import", format: ["camelCase", "PascalCase"] },
-  // Keys such as "@typescript-eslint/naming-convention" can't be renamed.
-  {
-    selector: ["objectLiteralProperty", "typeProperty"],
-    modifiers: ["requiresQuotes"],
-    format: null,
-  },
-];
+// componentNames adds PascalCase for React components, such as `Board`, written as a function or
+// as a const.
+function namingConvention(componentNames) {
+  const pascalCase = componentNames ? ["PascalCase"] : [];
+  return [
+    "error",
+    { selector: "default", format: ["camelCase"] },
+    { selector: "typeLike", format: ["PascalCase"] },
+    { selector: "function", format: ["camelCase", ...pascalCase] },
+    // Lint can't tell a fixed value from any other top-level const, so both are allowed.
+    {
+      selector: "variable",
+      modifiers: ["const", "global"],
+      format: ["camelCase", "UPPER_CASE", ...pascalCase],
+    },
+    { selector: "enumMember", format: ["UPPER_CASE"] },
+    { selector: "import", format: ["camelCase", "PascalCase"] },
+    // Keys such as "@typescript-eslint/naming-convention" can't be renamed.
+    {
+      selector: ["objectLiteralProperty", "typeProperty"],
+      modifiers: ["requiresQuotes"],
+      format: null,
+    },
+  ];
+}
 
 // When code goes over a limit, it's split, and the limit stays the same (CS-3).
 const READABILITY_LIMITS = {
@@ -92,7 +98,7 @@ const ENGINE_IMPORT_BANS = {
 };
 
 export default defineConfig(
-  globalIgnores(["**/dist/", "coverage/", ".claude/worktrees/"]),
+  globalIgnores(["**/dist/", "**/coverage/", ".claude/worktrees/"]),
   eslint.configs.recommended,
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,
@@ -112,7 +118,7 @@ export default defineConfig(
       "@typescript-eslint/no-floating-promises": "error",
       "@typescript-eslint/no-misused-promises": "error",
 
-      "@typescript-eslint/naming-convention": NAMING_CONVENTION,
+      "@typescript-eslint/naming-convention": namingConvention(false),
       "no-restricted-exports": [
         "error",
         {
@@ -142,7 +148,7 @@ export default defineConfig(
     },
   },
   {
-    files: ["packages/engine/**/*.{ts,tsx}"],
+    files: ["packages/engine/**/*.{ts,tsx,mts,cts}"],
     rules: ENGINE_IMPORT_BANS,
   },
   {
@@ -154,13 +160,9 @@ export default defineConfig(
     ],
   },
   {
-    // React components are functions named in PascalCase, such as `Board`.
     files: ["packages/client/**/*.tsx"],
     rules: {
-      "@typescript-eslint/naming-convention": [
-        ...NAMING_CONVENTION,
-        { selector: "function", format: ["camelCase", "PascalCase"] },
-      ],
+      "@typescript-eslint/naming-convention": namingConvention(true),
     },
   },
   {

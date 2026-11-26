@@ -7,9 +7,13 @@
 # make it pass (CS-3).
 set -uo pipefail
 
-file_path=$(jq -r '.tool_input.file_path // empty')
+# Node reads the hook's input, since this project always has it and may not have jq.
+file_path=$(node -e 'let s = ""; process.stdin.on("data", (d) => (s += d)); process.stdin.on("end", () => console.log(JSON.parse(s).tool_input?.file_path ?? ""));') || {
+  echo "The edit hook couldn't read its input, so the file wasn't checked." >&2
+  exit 2
+}
 case "$file_path" in
-  *.ts | *.tsx) ;;
+  *.ts | *.tsx | *.mts | *.cts) ;;
   *) exit 0 ;;
 esac
 
@@ -26,7 +30,7 @@ if ! output=$(node_modules/.bin/prettier --write "$file_path" 2>&1); then
   exit 2
 fi
 
-if ! output=$(node_modules/.bin/eslint --max-warnings 0 --no-warn-ignored "$file_path" 2>&1); then
+if ! output=$(node_modules/.bin/eslint --config eslint.config.mjs --max-warnings 0 --no-warn-ignored "$file_path" 2>&1); then
   printf 'ESLint failed on %s:\n%s\n' "$file_path" "$output" >&2
   exit 2
 fi
