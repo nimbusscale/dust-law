@@ -21,10 +21,24 @@ report. Don't write the docs from memory of the standards.
 Before you write an issue or the summary in a PR's description, or update an issue, read `github.md`
 in the `software-factory:standards` skill.
 
+Before you add, change or delete a code comment, move code that has comments, or review a change
+that does, read `code-comments.md` in the `software-factory:standards` skill.
+
+Before you write or change a test, read `tests.md` in the `software-factory:standards` skill.
+
 ## When work is done
 
 A change is done when all of these hold:
 
-- `tsc` passes in strict mode.
-- All tests pass.
+- `make check` passes.
 - The client and the server both build.
+
+## The check's config files
+
+Claude Code asks the owner before each edit to the check's config files, such as
+`eslint.config.mjs`, the tsconfigs and the `Makefile`, and to `.claude/settings.json` and the hook
+scripts. If a change to one seems needed, say why and ask first. Never change one, or add a comment
+that turns off a check, just to make the check pass (CS-3).
+
+After each edit to a TypeScript file under `packages/`, a hook formats and lints it, so errors come
+back right away.

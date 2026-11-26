@@ -15,8 +15,13 @@ the server and client use it (AD-6, AD-7, TR-1). Each phase builds only on the p
 ## Phase 1. Project setup
 
 Set up one npm workspace with three packages, engine, server and client (AD-6, AD-10), all in
-TypeScript strict mode (AD-1). Add Vitest (AD-4), Vite for the client (AD-3), React (AD-2) and Node for the server (AD-5).
-Add a lint rule that stops the engine from importing network code, DOM types or React (AD-7).
+TypeScript strict mode (AD-1). Put them in `packages/engine`, `packages/server` and
+`packages/client`, where the lint config expects them. Each package's tsconfig extends
+`tsconfig.base.json`, and only the client's adds the browser's types. Add Vitest (AD-4), Vite for
+the client (AD-3), React (AD-2) and Node for the server (AD-5).
+
+Add a root `tsconfig.json` that references the three packages, and add `tsc -b` and Vitest to
+`make check`.
 
 Done when `tsc` passes, an empty Vitest test passes in each part, and the client and server both
 build.

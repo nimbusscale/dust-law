@@ -4,5 +4,31 @@
       "source": { "source": "github", "repo": "nimbusscale/software-factory" }
     }
   },
-  "enabledPlugins": { "software-factory@software-factory": true }
+  "enabledPlugins": { "software-factory@software-factory": true },
+  "permissions": {
+    "ask": [
+      "Edit(/tsconfig*.json)",
+      "Edit(/packages/*/tsconfig*.json)",
+      "Edit(/eslint.config.*)",
+      "Edit(/.prettierrc.json)",
+      "Edit(/.prettierignore)",
+      "Edit(/lefthook.yml)",
+      "Edit(/Makefile)",
+      "Edit(/.claude/settings.json)",
+      "Edit(/.claude/hooks/**)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-edited-file.sh"
+          }
+        ]
+      }
+    ]
+  }
 }

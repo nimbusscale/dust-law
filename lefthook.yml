@@ -1,0 +1,14 @@
+# Claude Code asks the owner before each edit to this file, so an agent can't weaken a check to
+# make it pass (CS-3).
+
+# Standard ** matching: **/* covers files at any depth, including the repo root.
+glob_matcher: doublestar
+
+pre-commit:
+  commands:
+    check:
+      # The check reads no Markdown file, so a commit that changes only docs skips it.
+      glob: "**/*"
+      exclude:
+        - "**/*.md"
+      run: make check
