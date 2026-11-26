@@ -1,0 +1,8 @@
+{
+  "extraKnownMarketplaces": {
+    "software-factory": {
+      "source": { "source": "github", "repo": "nimbusscale/software-factory" }
+    }
+  },
+  "enabledPlugins": { "software-factory@software-factory": true }
+}
