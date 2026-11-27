@@ -28,10 +28,7 @@ Before you write or change a test, read `tests.md` in the `software-factory:stan
 
 ## When work is done
 
-A change is done when all of these hold:
-
-- `make check` passes.
-- The client and the server both build.
+A change is done when `make check` passes.
 
 ## The check's config files
 
