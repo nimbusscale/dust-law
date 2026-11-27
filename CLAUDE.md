@@ -18,8 +18,8 @@ Before you write, change or review a doc, or code that a doc describes, load the
 `software-factory:standards` skill and read it. If you can't load it, stop and say so in your
 report. Don't write the docs from memory of the standards.
 
-Before you write an issue or the summary in a PR's description, or update an issue, read `github.md`
-in the `software-factory:standards` skill.
+Before you start work on an issue, write an issue or the summary in a PR's description, or update
+an issue, read `github.md` in the `software-factory:standards` skill.
 
 Before you add, change or delete a code comment, move code that has comments, or review a change
 that does, read `code-comments.md` in the `software-factory:standards` skill.
