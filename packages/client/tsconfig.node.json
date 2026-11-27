@@ -1,0 +1,11 @@
+// Vite's types load Node's types. So vite.config.ts has its own tsconfig, which keeps Node's
+// globals out of the browser code.
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": ["vite.config.ts"]
+}

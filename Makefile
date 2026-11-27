@@ -14,3 +14,6 @@ setup:
 check:
 	node_modules/.bin/prettier --check .
 	node_modules/.bin/eslint --config eslint.config.mjs --max-warnings 0 .
+	node_modules/.bin/tsc -b
+	node_modules/.bin/vitest run --passWithNoTests
+	node_modules/.bin/vite build packages/client
