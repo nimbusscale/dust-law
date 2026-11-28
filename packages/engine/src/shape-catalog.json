@@ -1,0 +1,665 @@
+{
+  "hostileChancePercent": 15,
+  "shapes": [
+    {
+      "id": "open",
+      "edgeTypes": {
+        "north": "wasteland",
+        "east": "wasteland",
+        "south": "wasteland",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "wasteland",
+          "borderPositions": ["NW", "NE", "EN", "ES", "SE", "SW", "WS", "WN"],
+          "bordersBastionSegmentIds": []
+        }
+      ],
+      "weight": 8
+    },
+    {
+      "id": "outpost",
+      "edgeTypes": {
+        "north": "outpost",
+        "east": "outpost",
+        "south": "outpost",
+        "west": "outpost"
+      },
+      "segments": [
+        {
+          "kind": "outpost"
+        }
+      ],
+      "weight": 7
+    },
+    {
+      "id": "road-straight",
+      "edgeTypes": {
+        "north": "road",
+        "east": "wasteland",
+        "south": "road",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "road",
+          "edges": ["north", "south"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["NE", "EN", "ES", "SE"],
+          "bordersBastionSegmentIds": []
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SW", "WS", "WN", "NW"],
+          "bordersBastionSegmentIds": []
+        }
+      ],
+      "weight": 11
+    },
+    {
+      "id": "road-bend",
+      "edgeTypes": {
+        "north": "road",
+        "east": "road",
+        "south": "wasteland",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "road",
+          "edges": ["north", "east"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["NE", "EN"],
+          "bordersBastionSegmentIds": []
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["ES", "SE", "SW", "WS", "WN", "NW"],
+          "bordersBastionSegmentIds": []
+        }
+      ],
+      "weight": 9
+    },
+    {
+      "id": "road-junction",
+      "edgeTypes": {
+        "north": "road",
+        "east": "road",
+        "south": "road",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "road",
+          "edges": ["north"],
+          "endsAt": {
+            "kind": "junction"
+          }
+        },
+        {
+          "kind": "road",
+          "edges": ["east"],
+          "endsAt": {
+            "kind": "junction"
+          }
+        },
+        {
+          "kind": "road",
+          "edges": ["south"],
+          "endsAt": {
+            "kind": "junction"
+          }
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["NE", "EN"],
+          "bordersBastionSegmentIds": []
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["ES", "SE"],
+          "bordersBastionSegmentIds": []
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SW", "WS", "WN", "NW"],
+          "bordersBastionSegmentIds": []
+        }
+      ],
+      "weight": 5
+    },
+    {
+      "id": "road-crossroads",
+      "edgeTypes": {
+        "north": "road",
+        "east": "road",
+        "south": "road",
+        "west": "road"
+      },
+      "segments": [
+        {
+          "kind": "road",
+          "edges": ["north"],
+          "endsAt": {
+            "kind": "junction"
+          }
+        },
+        {
+          "kind": "road",
+          "edges": ["east"],
+          "endsAt": {
+            "kind": "junction"
+          }
+        },
+        {
+          "kind": "road",
+          "edges": ["south"],
+          "endsAt": {
+            "kind": "junction"
+          }
+        },
+        {
+          "kind": "road",
+          "edges": ["west"],
+          "endsAt": {
+            "kind": "junction"
+          }
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["NE", "EN"],
+          "bordersBastionSegmentIds": []
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["ES", "SE"],
+          "bordersBastionSegmentIds": []
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SW", "WS"],
+          "bordersBastionSegmentIds": []
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["WN", "NW"],
+          "bordersBastionSegmentIds": []
+        }
+      ],
+      "weight": 2
+    },
+    {
+      "id": "wall",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "wasteland",
+        "south": "wasteland",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["EN", "ES", "SE", "SW", "WS", "WN"],
+          "bordersBastionSegmentIds": ["b0"]
+        }
+      ],
+      "weight": 7
+    },
+    {
+      "id": "wall-road",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "road",
+        "south": "wasteland",
+        "west": "road"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north"]
+        },
+        {
+          "kind": "road",
+          "edges": ["east", "west"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["EN", "WN"],
+          "bordersBastionSegmentIds": ["b0"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["ES", "SE", "SW", "WS"],
+          "bordersBastionSegmentIds": []
+        }
+      ],
+      "weight": 5
+    },
+    {
+      "id": "wall-bend",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "road",
+        "south": "road",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north"]
+        },
+        {
+          "kind": "road",
+          "edges": ["east", "south"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["ES", "SE"],
+          "bordersBastionSegmentIds": []
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["EN", "SW", "WS", "WN"],
+          "bordersBastionSegmentIds": ["b0"]
+        }
+      ],
+      "weight": 4
+    },
+    {
+      "id": "wall-gate",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "wasteland",
+        "south": "road",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north"]
+        },
+        {
+          "kind": "road",
+          "edges": ["south"],
+          "endsAt": {
+            "kind": "gate",
+            "bastionSegmentId": "b0"
+          }
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SW", "WS", "WN"],
+          "bordersBastionSegmentIds": ["b0"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SE", "ES", "EN"],
+          "bordersBastionSegmentIds": ["b0"]
+        }
+      ],
+      "weight": 5
+    },
+    {
+      "id": "wall-junction",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "road",
+        "south": "road",
+        "west": "road"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north"]
+        },
+        {
+          "kind": "road",
+          "edges": ["east"],
+          "endsAt": {
+            "kind": "junction"
+          }
+        },
+        {
+          "kind": "road",
+          "edges": ["south"],
+          "endsAt": {
+            "kind": "junction"
+          }
+        },
+        {
+          "kind": "road",
+          "edges": ["west"],
+          "endsAt": {
+            "kind": "junction"
+          }
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["EN", "WN"],
+          "bordersBastionSegmentIds": ["b0"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["ES", "SE"],
+          "bordersBastionSegmentIds": []
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SW", "WS"],
+          "bordersBastionSegmentIds": []
+        }
+      ],
+      "weight": 3
+    },
+    {
+      "id": "corner",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "bastion",
+        "south": "wasteland",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north", "east"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SE", "SW", "WS", "WN"],
+          "bordersBastionSegmentIds": ["b0"]
+        }
+      ],
+      "weight": 7
+    },
+    {
+      "id": "corner-bend",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "bastion",
+        "south": "road",
+        "west": "road"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north", "east"]
+        },
+        {
+          "kind": "road",
+          "edges": ["south", "west"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SW", "WS"],
+          "bordersBastionSegmentIds": []
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SE", "WN"],
+          "bordersBastionSegmentIds": ["b0"]
+        }
+      ],
+      "weight": 4
+    },
+    {
+      "id": "corner-gate",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "bastion",
+        "south": "road",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north", "east"]
+        },
+        {
+          "kind": "road",
+          "edges": ["south"],
+          "endsAt": {
+            "kind": "gate",
+            "bastionSegmentId": "b0"
+          }
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SE"],
+          "bordersBastionSegmentIds": ["b0"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SW", "WS", "WN"],
+          "bordersBastionSegmentIds": ["b0"]
+        }
+      ],
+      "weight": 3
+    },
+    {
+      "id": "wide",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "bastion",
+        "south": "wasteland",
+        "west": "bastion"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north", "east", "west"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SE", "SW"],
+          "bordersBastionSegmentIds": ["b0"]
+        }
+      ],
+      "weight": 4
+    },
+    {
+      "id": "wide-gate",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "bastion",
+        "south": "road",
+        "west": "bastion"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north", "east", "west"]
+        },
+        {
+          "kind": "road",
+          "edges": ["south"],
+          "endsAt": {
+            "kind": "gate",
+            "bastionSegmentId": "b0"
+          }
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SW"],
+          "bordersBastionSegmentIds": ["b0"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SE"],
+          "bordersBastionSegmentIds": ["b0"]
+        }
+      ],
+      "weight": 3
+    },
+    {
+      "id": "full",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "bastion",
+        "south": "bastion",
+        "west": "bastion"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north", "east", "south", "west"]
+        }
+      ],
+      "weight": 1
+    },
+    {
+      "id": "band",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "wasteland",
+        "south": "bastion",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north", "south"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["EN", "ES"],
+          "bordersBastionSegmentIds": ["b0"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["WS", "WN"],
+          "bordersBastionSegmentIds": ["b0"]
+        }
+      ],
+      "weight": 4
+    },
+    {
+      "id": "gatehouse",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "road",
+        "south": "bastion",
+        "west": "road"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north", "south"]
+        },
+        {
+          "kind": "road",
+          "edges": ["east"],
+          "endsAt": {
+            "kind": "gate",
+            "bastionSegmentId": "b0"
+          }
+        },
+        {
+          "kind": "road",
+          "edges": ["west"],
+          "endsAt": {
+            "kind": "gate",
+            "bastionSegmentId": "b0"
+          }
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["EN"],
+          "bordersBastionSegmentIds": ["b0"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["ES"],
+          "bordersBastionSegmentIds": ["b0"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["WS"],
+          "bordersBastionSegmentIds": ["b0"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["WN"],
+          "bordersBastionSegmentIds": ["b0"]
+        }
+      ],
+      "weight": 2
+    },
+    {
+      "id": "twin-walls",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "wasteland",
+        "south": "bastion",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north"]
+        },
+        {
+          "kind": "bastion",
+          "id": "b1",
+          "edges": ["south"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["EN", "ES", "WS", "WN"],
+          "bordersBastionSegmentIds": ["b0", "b1"]
+        }
+      ],
+      "weight": 3
+    },
+    {
+      "id": "twin-corner",
+      "edgeTypes": {
+        "north": "bastion",
+        "east": "bastion",
+        "south": "wasteland",
+        "west": "wasteland"
+      },
+      "segments": [
+        {
+          "kind": "bastion",
+          "id": "b0",
+          "edges": ["north"]
+        },
+        {
+          "kind": "bastion",
+          "id": "b1",
+          "edges": ["east"]
+        },
+        {
+          "kind": "wasteland",
+          "borderPositions": ["SE", "SW", "WS", "WN"],
+          "bordersBastionSegmentIds": ["b0", "b1"]
+        }
+      ],
+      "weight": 3
+    }
+  ]
+}
